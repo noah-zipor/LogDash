@@ -46,14 +46,6 @@ Security is treated as a fundamental requirement, integrated directly into the i
 
 ## Installation & Deployment Pipelines
 
-### Automated Installation
-
-An idempotent bootstrap script is provided for immediate compilation, packaging, and startup registration on macOS:
-
-```bash
-curl -sSL https://raw.githubusercontent.com/nzc0der/startup-dash/main/install.sh | bash
-```
-
 *Note: Requires Swift Command Line Tools (macOS) or .NET SDK (Windows).*
 
 ### Manual Compilation Strategy
@@ -96,5 +88,4 @@ Configuration points span multiple architectural layers:
 - **Cryptographic Reset**: Requires explicit interaction with the platform's root security layer (Keychain Access on macOS, Credential Manager on Windows) to evict the "StartupDashboard" generic credentials token.
 
 ## License
-
-Engineering standards enforced by the Senior Desktop Platform Team. All rights reserved.
+MIT
