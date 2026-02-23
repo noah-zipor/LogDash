@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="*" Name="StartupDashboard" Language="1033" Version="1.0.0.0" Manufacturer="Senior Engineering Team" UpgradeCode="a1b2c3d4-e5f6-4a5b-8c7d-9e0f1a2b3c4d">
+        <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+        <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+        <MediaTemplate EmbedCab="yes" />
+
+        <!-- Application Icon -->
+        <Icon Id="AppIcon" SourceFile="StartupDashboard.exe" />
+        <Property Id="ARPPRODUCTICON" Value="AppIcon" />
+
+        <!-- User Interface -->
+        <UIRef Id="WixUI_InstallDir" />
+        <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+
+        <Feature Id="ProductFeature" Title="StartupDashboard" Level="1">
+            <ComponentGroupRef Id="ProductComponents" />
+        </Feature>
+    </Product>
+
+    <Fragment>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder">
+                <Directory Id="INSTALLFOLDER" Name="StartupDashboard" />
+            </Directory>
+        </Directory>
+    </Fragment>
+
+    <Fragment>
+        <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+            <Component Id="MainExecutable" Guid="b2c3d4e5-f6a1-4b5c-8d7e-0f1a2b3c4d5e">
+                <File Id="StartupDashboardEXE" Source="StartupDashboard.exe" KeyPath="yes" />
+
+                <!-- Registry key for startup -->
+                <RegistryKey Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\Run">
+                    <RegistryValue Type="string" Name="StartupDashboard" Value="&quot;[INSTALLFOLDER]StartupDashboard.exe&quot;" />
+                </RegistryKey>
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>
