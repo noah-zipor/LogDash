@@ -62,13 +62,13 @@ The project features IDE-independent build pipelines designed for CI/CD integrat
 
 **Windows (.NET 6 SDK)**:
 ```powershell
-./build.ps1
+./Windows-Install.ps1
 ```
 Executes targeted MSBuild operations, dependency restoration, native compilation, and subsequent packaging routines.
 
 **macOS (Swift 5.7+ Environment)**:
 ```bash
-./build.sh
+./macOS-Install.sh
 ```
 Triggers the Swift Package Manager (SPM) pipeline, compiling native binaries and structuring the final standard `.app` bundle structure out-of-tree.
 
