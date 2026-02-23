@@ -1,5 +1,5 @@
 # LogDash
-![Platform](https://img.shields.io/badge/platform-macOS-blue)
+![Platform](https://img.shields.io/badge/platform-macOS-soon-windows-blue)
 ![Swift](https://img.shields.io/badge/Swift-5.9-orange)
 ![Version](https://img.shields.io/badge/version-1.0.0-green)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
