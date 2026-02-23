@@ -1,0 +1,11 @@
+<Application x:Class="StartupDashboard.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary xmlns:local="clr-namespace:StartupDashboard.UI">
+             <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+             <local:PlaybackStateConverter x:Key="PlaybackStateConverter" />
+             <local:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
