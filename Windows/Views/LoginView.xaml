@@ -6,20 +6,55 @@
              mc:Ignorable="d"
              d:DesignHeight="1080" d:DesignWidth="1920">
     <Grid>
-        <!-- Blurred Background remains from previous screen or is re-rendered -->
-        <Image x:Name="BackgroundImage" Stretch="UniformToFill" />
-        <Rectangle Fill="Black" Opacity="0.4" />
+        <Grid.Resources>
+            <Storyboard x:Key="EntryAnim">
+                <DoubleAnimation Storyboard.TargetName="LoginCard"
+                                 Storyboard.TargetProperty="Opacity"
+                                 From="0" To="1" Duration="0:0:0.5"/>
+                <DoubleAnimation Storyboard.TargetName="CardScale"
+                                 Storyboard.TargetProperty="ScaleX"
+                                 From="0.92" To="1" Duration="0:0:0.45">
+                    <DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.3"/></DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation Storyboard.TargetName="CardScale"
+                                 Storyboard.TargetProperty="ScaleY"
+                                 From="0.92" To="1" Duration="0:0:0.45">
+                    <DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.3"/></DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+        </Grid.Resources>
+        <UserControl.Triggers>
+            <EventTrigger RoutedEvent="UserControl.Loaded">
+                <BeginStoryboard Storyboard="{StaticResource EntryAnim}"/>
+            </EventTrigger>
+        </UserControl.Triggers>
 
-        <Border x:Name="LoginPanel"
-                Width="400" Height="300"
-                Background="#33FFFFFF"
-                CornerRadius="20"
+        <Image x:Name="BackgroundImage" Stretch="UniformToFill"/>
+        <Rectangle Fill="Black" Opacity="0.45"/>
+
+        <!-- Ambient glow -->
+        <Ellipse Width="500" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#33003366" Offset="0"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+            <Ellipse.Effect><BlurEffect Radius="40"/></Ellipse.Effect>
+        </Ellipse>
+
+        <Border x:Name="LoginCard"
+                Width="420"
+                Background="#33000000"
+                CornerRadius="24"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
+                Opacity="0"
                 RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
-                <TranslateTransform x:Name="LoginPanelTransform" />
+                <ScaleTransform x:Name="CardScale"/>
             </Border.RenderTransform>
+            <!-- Shake animation on error -->
             <Border.Style>
                 <Style TargetType="Border">
                     <Style.Triggers>
@@ -27,12 +62,11 @@
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(RenderTransform).(TranslateTransform.X)">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="-10" />
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="10" />
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="-10" />
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="10" />
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0" />
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)">
+                                            <DiscreteDoubleKeyFrame KeyTime="0:0:0.0" Value="1.0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)">
+                                            <DiscreteDoubleKeyFrame KeyTime="0:0:0.0" Value="1.0"/>
                                         </DoubleAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -41,51 +75,124 @@
                     </Style.Triggers>
                 </Style>
             </Border.Style>
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="30" Opacity="0.5" ShadowDepth="0" />
-            </Border.Effect>
+            <!-- Shake via translate -->
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Border.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard x:Name="ShakeStoryboard"/>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+            <Border x:Name="LoginPanel"
+                    Background="#22FFFFFF"
+                    CornerRadius="24"
+                    RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <TranslateTransform x:Name="LoginPanelTransform"/>
+                </Border.RenderTransform>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsErrorVisible}" Value="True">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(RenderTransform).(TranslateTransform.X)">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.05" Value="-12"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.1"  Value="12"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="-10"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2"  Value="10"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-6"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.3"  Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="40" Opacity="0.5" ShadowDepth="0"/>
+                </Border.Effect>
 
-            <StackPanel Margin="40" VerticalAlignment="Center">
-                <TextBlock Text="Authentication"
-                           Foreground="White"
-                           FontSize="24"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,30"/>
+                <StackPanel Margin="45,40" VerticalAlignment="Center">
+                    <!-- Avatar icon -->
+                    <Border Width="70" Height="70" CornerRadius="35"
+                            HorizontalAlignment="Center" Margin="0,0,0,16">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#661E3A5F" Offset="0"/>
+                                <GradientStop Color="#66613659" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <TextBlock Text="👤" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
 
-                <PasswordBox x:Name="PasswordInput"
-                             Height="40"
-                             Margin="0,0,0,10"
-                             VerticalContentAlignment="Center"
-                             Padding="10,0"
-                             PasswordChanged="PasswordInput_PasswordChanged"/>
+                    <TextBlock Text="Welcome Back"
+                               Foreground="White"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,4"/>
+                    <TextBlock Text="Enter your password to continue"
+                               Foreground="#88FFFFFF"
+                               FontSize="13"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,28"/>
 
-                <TextBlock Text="{Binding ErrorMessage}"
-                           Foreground="#FFFF6B6B"
-                           Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,10"/>
+                    <PasswordBox x:Name="PasswordInput"
+                                 Height="44"
+                                 Margin="0,0,0,10"
+                                 VerticalContentAlignment="Center"
+                                 Padding="14,0"
+                                 FontSize="14"
+                                 PasswordChanged="PasswordInput_PasswordChanged"/>
 
-                <Button Content="Unlock"
-                        Command="{Binding LoginCommand}"
-                        Height="40"
-                        Background="#44FFFFFF"
-                        Foreground="White"
-                        BorderThickness="0"
-                        Margin="0,10,0,0">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
+                    <!-- Error message -->
+                    <StackPanel Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Margin="0,0,0,6">
+                        <TextBlock Text="{Binding ErrorMessage}"
+                                   Foreground="#FFFF7070"
+                                   HorizontalAlignment="Center"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
 
-                <Button Content="Exit"
-                        Command="{Binding ExitCommand}"
-                        Background="Transparent"
-                        Foreground="#AAFFFFFF"
-                        BorderThickness="0"
-                        Margin="0,20,0,0"/>
-            </StackPanel>
+                    <!-- Attempts warning -->
+                    <TextBlock Text="{Binding AttemptsWarningText}"
+                               Foreground="#FFFF8C00"
+                               HorizontalAlignment="Center"
+                               FontSize="12"
+                               Margin="0,0,0,16"
+                               Visibility="{Binding ShowAttemptsWarning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                    <Button Content="🔓  Unlock"
+                            Command="{Binding LoginCommand}"
+                            Height="44"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Background="#660090FF"
+                            Margin="0,4,0,0">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="8"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button Content="Exit"
+                            Command="{Binding ExitCommand}"
+                            Background="Transparent"
+                            Foreground="#66FFFFFF"
+                            BorderThickness="0"
+                            FontSize="12"
+                            Margin="0,18,0,0"/>
+                </StackPanel>
+            </Border>
         </Border>
     </Grid>
 </UserControl>

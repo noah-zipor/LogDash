@@ -7,12 +7,16 @@ protocol SecurityPolicyServiceProtocol {
 }
 
 class SecurityPolicyService: SecurityPolicyServiceProtocol {
-    private var failedAttempts = 0
+    private(set) var failedAttempts = 0
     private let maxAttempts = 5
-    private var lockoutExpiry = Date.distantPast
+    private(set) var lockoutExpiry = Date.distantPast
 
     var isLockedOut: Bool {
         return Date() < lockoutExpiry
+    }
+
+    var attemptsRemaining: Int {
+        return max(0, maxAttempts - failedAttempts)
     }
 
     func recordFailedAttempt() {

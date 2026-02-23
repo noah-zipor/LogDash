@@ -15,7 +15,7 @@ class MainViewModel: ObservableObject {
     let authService: AuthServiceProtocol
     let mediaService: MediaServiceProtocol
     let appService: AppServiceProtocol
-    let securityPolicy: SecurityPolicyServiceProtocol
+    let securityPolicy: SecurityPolicyService
     let systemMonitor: SystemMonitorServiceProtocol
 
     private var cachedApps: [AppEntry] = []
@@ -23,7 +23,7 @@ class MainViewModel: ObservableObject {
     init(authService: AuthServiceProtocol,
          mediaService: MediaServiceProtocol,
          appService: AppServiceProtocol,
-         securityPolicy: SecurityPolicyServiceProtocol,
+         securityPolicy: SecurityPolicyService,
          systemMonitor: SystemMonitorServiceProtocol) {
         self.authService = authService
         self.mediaService = mediaService

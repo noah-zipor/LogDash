@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SetupView: View {
     @ObservedObject var viewModel: SetupViewModel
+    @State private var isLoaded = false
 
     var body: some View {
         ZStack {
@@ -11,65 +12,93 @@ struct SetupView: View {
             Color.black.opacity(0.4).ignoresSafeArea()
                 .filmGrain()
 
-            VStack(spacing: 20) {
-                Text("Initialize Dashboard")
-                    .font(.title)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
+            // Subtle background glow
+            Circle()
+                .fill(LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.2), Color.cyan.opacity(0.15)]), startPoint: .top, endPoint: .bottom))
+                .frame(width: 500, height: 500)
+                .blur(radius: 120)
 
-                Text("Set a secure password for your first run.")
-                    .font(.subheadline)
-                    .foregroundColor(.white.opacity(0.7))
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 10)
+            VStack(spacing: 24) {
+                Image(systemName: "lock.shield.fill")
+                    .font(.system(size: 56))
+                    .foregroundStyle(
+                        LinearGradient(colors: [.white.opacity(0.9), .blue.opacity(0.6)], startPoint: .top, endPoint: .bottom)
+                    )
+                    .shadow(color: .blue.opacity(0.4), radius: 12, x: 0, y: 0)
 
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("New Password")
-                        .font(.caption)
+                VStack(spacing: 6) {
+                    Text("Initialize Dashboard")
+                        .font(.system(size: 26, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                    Text("Set a secure password to protect your workspace.")
+                        .font(.system(.subheadline, design: .rounded))
                         .foregroundColor(.white.opacity(0.6))
-                    SecureField("", text: $viewModel.password)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .multilineTextAlignment(.center)
                 }
-                .frame(width: 280)
 
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Confirm Password")
-                        .font(.caption)
-                        .foregroundColor(.white.opacity(0.6))
-                    SecureField("", text: $viewModel.confirmPassword)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                VStack(spacing: 16) {
+                    LabeledPasswordField(title: "New Password", text: $viewModel.password)
+                    LabeledPasswordField(title: "Confirm Password", text: $viewModel.confirmPassword)
                 }
-                .frame(width: 280)
 
                 if viewModel.isErrorVisible {
-                    Text(viewModel.errorMessage)
+                    Label(viewModel.errorMessage, systemImage: "exclamationmark.circle.fill")
                         .foregroundColor(.red)
                         .font(.caption)
+                        .transition(.opacity.combined(with: .move(edge: .top)))
                 }
 
-                Button("Complete Setup") {
-                    viewModel.setup()
+                Button(action: { withAnimation { viewModel.setup() } }) {
+                    HStack {
+                        Image(systemName: "checkmark.seal.fill")
+                        Text("Complete Setup")
+                    }
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
-                .frame(width: 280)
-                .padding(.top, 10)
+                .controlSize(.large)
+                .tint(.blue)
+                .frame(width: 300)
 
-                Button("Exit") {
-                    viewModel.exit()
-                }
-                .buttonStyle(.plain)
-                .foregroundColor(.white.opacity(0.5))
+                Button("Exit") { viewModel.exit() }
+                    .buttonStyle(.plain)
+                    .foregroundColor(.white.opacity(0.4))
+                    .font(.footnote)
             }
-            .padding(40)
+            .padding(50)
+            .frame(width: 420)
             .background(
-                RoundedRectangle(cornerRadius: 24)
-                    .fill(Color.white.opacity(0.1))
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(Color.black.opacity(0.4))
+                    .background(VisualEffectView(material: .popover, blendingMode: .withinWindow).cornerRadius(30))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 24)
-                            .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(LinearGradient(colors: [.white.opacity(0.25), .clear], startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 1)
                     )
             )
-            .shadow(color: .black.opacity(0.3), radius: 30, x: 0, y: 15)
+            .shadow(color: .black.opacity(0.5), radius: 40, x: 0, y: 20)
+            .drawingGroup()
+            .scaleEffect(isLoaded ? 1 : 0.9)
+            .opacity(isLoaded ? 1 : 0)
+            .animation(.spring(response: 0.6, dampingFraction: 0.8), value: isLoaded)
+            .onAppear { isLoaded = true }
         }
+    }
+}
+
+private struct LabeledPasswordField: View {
+    let title: String
+    @Binding var text: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(title)
+                .font(.system(.caption, design: .rounded).weight(.semibold))
+                .foregroundColor(.white.opacity(0.6))
+            SecureField("", text: $text)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+        }
+        .frame(width: 300)
     }
 }

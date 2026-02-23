@@ -3,9 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
         <ResourceDictionary xmlns:local="clr-namespace:StartupDashboard.UI">
-             <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-             <local:PlaybackStateConverter x:Key="PlaybackStateConverter" />
-             <local:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
+            <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"/>
+            <local:PlaybackStateConverter x:Key="PlaybackStateConverter"/>
+            <local:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter"/>
+
+            <!-- Quick Action button style -->
+            <Style x:Key="QuickActionButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="#0AFFFFFF"/>
+                <Setter Property="Foreground" Value="#CCFFFFFF"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Padding" Value="16,10"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="10"
+                                    Padding="{TemplateBinding Padding}"
+                                    RenderTransformOrigin="0.5,0.5">
+                                <Border.RenderTransform><ScaleTransform/></Border.RenderTransform>
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="Bd"
+                                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                To="#22FFFFFF" Duration="0:0:0.12"/>
+                                                <DoubleAnimation Storyboard.TargetName="Bd"
+                                                                 Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 To="1.06" Duration="0:0:0.12"/>
+                                                <DoubleAnimation Storyboard.TargetName="Bd"
+                                                                 Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                                                 To="1.06" Duration="0:0:0.12"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="Border.MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="Bd"
+                                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                To="#0AFFFFFF" Duration="0:0:0.18"/>
+                                                <DoubleAnimation Storyboard.TargetName="Bd"
+                                                                 Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 To="1.0" Duration="0:0:0.18"/>
+                                                <DoubleAnimation Storyboard.TargetName="Bd"
+                                                                 Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)"
+                                                                 To="1.0" Duration="0:0:0.18"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Border.Triggers>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -11,8 +11,27 @@ class DashboardViewModel: ObservableObject {
     @Published var nowPlaying: MediaInfo?
     @Published var apps: [AppEntry] = []
     @Published var systemStats = SystemStats(cpuUsage: 0, memoryUsage: 0)
+    @Published var searchQuery = ""
+
+    // Cached formatters — allocating DateFormatter is expensive; cache for performance
+    private let timeFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "HH:mm:ss"
+        return f
+    }()
+
+    private let dateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "EEEE, MMMM d, yyyy"
+        return f
+    }()
 
     private var cancellables = Set<AnyCancellable>()
+
+    var filteredApps: [AppEntry] {
+        if searchQuery.isEmpty { return apps }
+        return apps.filter { $0.name.localizedCaseInsensitiveContains(searchQuery) }
+    }
 
     init(mediaService: MediaServiceProtocol, appService: AppServiceProtocol, systemMonitor: SystemMonitorServiceProtocol) {
         self.mediaService = mediaService
@@ -20,7 +39,7 @@ class DashboardViewModel: ObservableObject {
         self.systemMonitor = systemMonitor
 
         self.mediaService.onMediaChanged = { [weak self] info in
-            self?.nowPlaying = info
+            DispatchQueue.main.async { self?.nowPlaying = info }
         }
 
         self.nowPlaying = self.mediaService.getCurrentMedia()
@@ -33,11 +52,20 @@ class DashboardViewModel: ObservableObject {
     }
 
     private func startSystemMonitoring() {
+        // First sample after 0.5 s so the delta CPU reading is meaningful
+        DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard let self = self else { return }
+            // Warm up delta
+            _ = self.systemMonitor.getStats()
+        }
+
         Timer.publish(every: 2.0, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
-                if let stats = self?.systemMonitor.getStats() {
-                    self?.systemStats = stats
+                guard let self = self else { return }
+                DispatchQueue.global(qos: .utility).async {
+                    let stats = self.systemMonitor.getStats()
+                    DispatchQueue.main.async { self.systemStats = stats }
                 }
             }
             .store(in: &cancellables)
@@ -46,21 +74,14 @@ class DashboardViewModel: ObservableObject {
     private func startClock() {
         Timer.publish(every: 1.0, on: .main, in: .common)
             .autoconnect()
-            .sink { [weak self] _ in
-                self?.updateTime()
-            }
+            .sink { [weak self] _ in self?.updateTime() }
             .store(in: &cancellables)
         updateTime()
     }
 
     private func updateTime() {
         let now = Date()
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "HH:mm:ss"
         currentTime = timeFormatter.string(from: now)
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMMM d, yyyy"
         currentDate = dateFormatter.string(from: now)
     }
 

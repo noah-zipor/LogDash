@@ -56,13 +56,20 @@ namespace StartupDashboard.UI
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool b)
-            {
-                return b ? Visibility.Visible : Visibility.Collapsed;
-            }
+            if (value is bool b) return b ? Visibility.Visible : Visibility.Collapsed;
             return Visibility.Collapsed;
         }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+    }
 
+    /// <summary>Shows element when binding is <c>false</c>, collapses when <c>true</c>.</summary>
+    public class InverseBooleanToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool b) return b ? Visibility.Collapsed : Visibility.Visible;
+            return Visibility.Visible;
+        }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
     }
 }

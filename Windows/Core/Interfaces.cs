@@ -43,8 +43,13 @@ namespace StartupDashboard.Core
 
     public class SystemStats
     {
-        public double CpuUsage { get; set; }
+        public double CpuUsage    { get; set; }
         public double MemoryUsage { get; set; }
+        /// <summary>0–100 % disk used, or -1 if unavailable.</summary>
+        public double DiskUsage   { get; set; } = -1;
+        /// <summary>0–100 % battery, or -1 for desktops/unavailable.</summary>
+        public double BatteryLevel { get; set; } = -1;
+        public bool   IsCharging  { get; set; }
     }
 
     public interface ISystemMonitorService

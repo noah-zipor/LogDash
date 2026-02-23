@@ -6,28 +6,29 @@
              mc:Ignorable="d"
              d:DesignHeight="1080" d:DesignWidth="1920">
     <Grid x:Name="RootGrid">
-        <!-- Wallpaper Background (set in code-behind) -->
-        <Image x:Name="WallpaperImage" Stretch="UniformToFill" />
+        <!-- Wallpaper Background -->
+        <Image x:Name="WallpaperImage" Stretch="UniformToFill"/>
 
-        <!-- Composition Blur and Effects will be applied here via code-behind -->
-        <Canvas x:Name="CompositionCanvas" />
+        <!-- Composition blur canvas -->
+        <Canvas x:Name="CompositionCanvas"/>
 
         <!-- Dark Overlay -->
-        <Rectangle Fill="Black" Opacity="0.3" />
+        <Rectangle Fill="Black" Opacity="0.32"/>
 
-        <!-- Film Grain Texture (simulated with a drawing brush for low overhead) -->
-        <Rectangle x:Name="GrainOverlay" Opacity="0.03" Visibility="Visible" IsHitTestVisible="False">
+        <!-- Film Grain Texture -->
+        <Rectangle x:Name="GrainOverlay" Opacity="0.03" IsHitTestVisible="False">
             <Rectangle.Fill>
                 <DrawingBrush TileMode="Tile" Viewport="0,0,128,128" ViewportUnits="Absolute">
                     <DrawingBrush.Drawing>
                         <GeometryDrawing Brush="White">
                             <GeometryDrawing.Geometry>
                                 <GeometryGroup>
-                                    <EllipseGeometry Center="10,10" RadiusX="0.5" RadiusY="0.5" />
-                                    <EllipseGeometry Center="50,30" RadiusX="0.5" RadiusY="0.5" />
-                                    <EllipseGeometry Center="90,70" RadiusX="0.5" RadiusY="0.5" />
-                                    <EllipseGeometry Center="30,110" RadiusX="0.5" RadiusY="0.5" />
-                                    <!-- A senior engineer would use a noise shader, but this provides a clean vector fallback -->
+                                    <EllipseGeometry Center="10,10" RadiusX="0.5" RadiusY="0.5"/>
+                                    <EllipseGeometry Center="50,30" RadiusX="0.5" RadiusY="0.5"/>
+                                    <EllipseGeometry Center="90,70" RadiusX="0.5" RadiusY="0.5"/>
+                                    <EllipseGeometry Center="30,110" RadiusX="0.5" RadiusY="0.5"/>
+                                    <EllipseGeometry Center="70,90"  RadiusX="0.5" RadiusY="0.5"/>
+                                    <EllipseGeometry Center="20,60"  RadiusX="0.5" RadiusY="0.5"/>
                                 </GeometryGroup>
                             </GeometryDrawing.Geometry>
                         </GeometryDrawing>
@@ -36,19 +37,56 @@
             </Rectangle.Fill>
         </Rectangle>
 
+        <!-- Ambient glow behind text -->
+        <Ellipse Width="800" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#18FFFFFF" Offset="0"/>
+                    <GradientStop Color="#00000000" Offset="1"/>
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+            <Ellipse.Effect><BlurEffect Radius="60"/></Ellipse.Effect>
+        </Ellipse>
+
         <!-- Greeting Text -->
         <TextBlock x:Name="GreetingText"
                    Text="{Binding Greeting}"
-                   Foreground="White"
-                   FontSize="140"
+                   FontSize="130"
                    FontWeight="Light"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    TextAlignment="Center">
+            <TextBlock.Foreground>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                    <GradientStop Color="#99FFFFFF"  Offset="1"/>
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+            <TextBlock.Effect>
+                <DropShadowEffect BlurRadius="25" Opacity="0.35" ShadowDepth="0"/>
+            </TextBlock.Effect>
             <TextBlock.RenderTransform>
-                <TranslateTransform x:Name="TextTransform" Y="100" />
+                <TranslateTransform x:Name="TextTransform" Y="60"/>
             </TextBlock.RenderTransform>
             <TextBlock.Opacity>0</TextBlock.Opacity>
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="TextBlock.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="GreetingText"
+                                             Storyboard.TargetProperty="Opacity"
+                                             From="0" To="1" Duration="0:0:1.1">
+                                <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetName="TextTransform"
+                                             Storyboard.TargetProperty="Y"
+                                             From="60" To="0" Duration="0:0:1.0">
+                                <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
         </TextBlock>
     </Grid>
 </UserControl>

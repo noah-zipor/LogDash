@@ -39,6 +39,17 @@ protocol StartupServiceProtocol {
 struct SystemStats {
     let cpuUsage: Double
     let memoryUsage: Double
+    let diskUsage: Double     // 0–100 %
+    let batteryLevel: Double  // 0–100 % (or -1 if desktop/unavailable)
+    let isCharging: Bool
+
+    init(cpuUsage: Double, memoryUsage: Double, diskUsage: Double = -1, batteryLevel: Double = -1, isCharging: Bool = false) {
+        self.cpuUsage = cpuUsage
+        self.memoryUsage = memoryUsage
+        self.diskUsage = diskUsage
+        self.batteryLevel = batteryLevel
+        self.isCharging = isCharging
+    }
 }
 
 protocol SystemMonitorServiceProtocol {

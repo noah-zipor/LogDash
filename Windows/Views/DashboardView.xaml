@@ -7,119 +7,236 @@
              d:DesignHeight="1080" d:DesignWidth="1920">
     <Grid>
         <Grid.Resources>
+            <!-- Entry animations -->
             <Storyboard x:Key="OnLoadedStoryboard">
-                <DoubleAnimation Storyboard.TargetName="BackgroundWallpaper" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" From="1.1" To="1.0" Duration="0:0:1.5">
-                    <DoubleAnimation.EasingFunction>
-                        <CubicEase EasingMode="EaseOut" />
-                    </DoubleAnimation.EasingFunction>
+                <DoubleAnimation Storyboard.TargetName="BackgroundWallpaper" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" From="1.08" To="1.0" Duration="0:0:1.2">
+                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
-                <DoubleAnimation Storyboard.TargetName="BackgroundWallpaper" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" From="1.1" To="1.0" Duration="0:0:1.5">
-                    <DoubleAnimation.EasingFunction>
-                        <CubicEase EasingMode="EaseOut" />
-                    </DoubleAnimation.EasingFunction>
+                <DoubleAnimation Storyboard.TargetName="BackgroundWallpaper" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" From="1.08" To="1.0" Duration="0:0:1.2">
+                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
-
-                <DoubleAnimation Storyboard.TargetName="TimePanel" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1" />
-                <DoubleAnimation Storyboard.TargetName="TimePanel" Storyboard.TargetProperty="(RenderTransform).(TranslateTransform.Y)" From="50" To="0" Duration="0:0:0.8">
-                    <DoubleAnimation.EasingFunction>
-                        <CubicEase EasingMode="EaseOut" />
-                    </DoubleAnimation.EasingFunction>
+                <DoubleAnimation Storyboard.TargetName="LeftPanel" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.8" BeginTime="0:0:0.1"/>
+                <DoubleAnimation Storyboard.TargetName="LeftPanel" Storyboard.TargetProperty="(RenderTransform).(TranslateTransform.Y)" From="40" To="0" Duration="0:0:0.7" BeginTime="0:0:0.1">
+                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
-
-                <DoubleAnimation Storyboard.TargetName="AppsTitle" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1" BeginTime="0:0:0.3" />
-
-                <DoubleAnimation Storyboard.TargetName="NowPlayingPanel" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1" BeginTime="0:0:0.5" />
-                <DoubleAnimation Storyboard.TargetName="NowPlayingPanel" Storyboard.TargetProperty="(RenderTransform).(TranslateTransform.X)" From="100" To="0" Duration="0:0:1" BeginTime="0:0:0.5">
-                    <DoubleAnimation.EasingFunction>
-                        <CubicEase EasingMode="EaseOut" />
-                    </DoubleAnimation.EasingFunction>
+                <DoubleAnimation Storyboard.TargetName="NowPlayingPanel" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.8" BeginTime="0:0:0.4"/>
+                <DoubleAnimation Storyboard.TargetName="NowPlayingPanel" Storyboard.TargetProperty="(RenderTransform).(TranslateTransform.X)" From="80" To="0" Duration="0:0:0.7" BeginTime="0:0:0.4">
+                    <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
             </Storyboard>
         </Grid.Resources>
-
         <UserControl.Triggers>
             <EventTrigger RoutedEvent="UserControl.Loaded">
-                <BeginStoryboard Storyboard="{StaticResource OnLoadedStoryboard}" />
+                <BeginStoryboard Storyboard="{StaticResource OnLoadedStoryboard}"/>
             </EventTrigger>
         </UserControl.Triggers>
 
-        <!-- Background with blur and grain -->
+        <!-- Background -->
         <Image x:Name="BackgroundWallpaper" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
-                <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
-            </Image.RenderTransform>
+            <Image.RenderTransform><ScaleTransform ScaleX="1.08" ScaleY="1.08"/></Image.RenderTransform>
         </Image>
-        <Rectangle Fill="Black" Opacity="0.5" />
+        <Rectangle Fill="Black" Opacity="0.5"/>
 
         <Grid Margin="60">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="320"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Left Side: Time and Apps -->
-            <StackPanel Grid.Column="0">
-                <StackPanel x:Name="TimePanel" Margin="0,0,0,50" RenderTransformOrigin="0.5,0.5">
-                    <StackPanel.RenderTransform>
-                        <TranslateTransform />
-                    </StackPanel.RenderTransform>
-                    <TextBlock Text="{Binding CurrentTime}" FontSize="120" Foreground="White" FontWeight="Bold" />
-                    <TextBlock Text="{Binding CurrentDate}" FontSize="32" Foreground="#AAFFFFFF" />
+            <!-- ══ LEFT COLUMN ══════════════════════════════════════════════ -->
+            <StackPanel x:Name="LeftPanel" Grid.Column="0" Opacity="0" RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform><TranslateTransform/></StackPanel.RenderTransform>
+
+                <!-- Clock -->
+                <StackPanel Margin="0,0,0,24">
+                    <TextBlock Text="{Binding CurrentTime}" FontSize="110" Foreground="White" FontWeight="Bold">
+                        <TextBlock.Effect><DropShadowEffect BlurRadius="20" Opacity="0.4" ShadowDepth="0"/></TextBlock.Effect>
+                    </TextBlock>
+                    <TextBlock Text="{Binding CurrentDate}" FontSize="26" Foreground="#BBFFFFFF"/>
                 </StackPanel>
 
-                <!-- System Stats -->
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,30">
-                    <Border Background="#11FFFFFF" CornerRadius="10" Padding="15,10" Margin="0,0,20,0">
+                <!-- System Stats row -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <!-- CPU -->
+                    <Border Background="#0EFFFFFF" CornerRadius="12" Padding="14,10" Margin="0,0,12,0" MinWidth="90">
+                        <Border.Effect><DropShadowEffect BlurRadius="8" Opacity="0.3" ShadowDepth="0"/></Border.Effect>
                         <StackPanel>
-                            <TextBlock Text="CPU" FontSize="12" Foreground="#88FFFFFF" FontWeight="Bold" />
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding SystemStats.CpuUsage, StringFormat={}{0:F0}}" FontSize="20" Foreground="White" FontFamily="Consolas" />
-                                <TextBlock Text="%" FontSize="12" Foreground="#44FFFFFF" VerticalAlignment="Bottom" Margin="2,0,0,2"/>
+                            <TextBlock Text="CPU" FontSize="11" Foreground="#88FFFFFF" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding SystemStats.CpuUsage, StringFormat={}{0:F0}}" FontSize="22" Foreground="White" FontWeight="Bold"/>
+                                <TextBlock Text="%" FontSize="11" Foreground="#55FFFFFF" VerticalAlignment="Bottom" Margin="2,0,0,3"/>
                             </StackPanel>
+                            <ProgressBar Value="{Binding SystemStats.CpuUsage}" Maximum="100" Height="3" Margin="0,4,0,0"
+                                         Background="#22FFFFFF" Foreground="#AA87CEEB" BorderThickness="0"/>
                         </StackPanel>
                     </Border>
-                    <Border Background="#11FFFFFF" CornerRadius="10" Padding="15,10">
+                    <!-- MEM -->
+                    <Border Background="#0EFFFFFF" CornerRadius="12" Padding="14,10" Margin="0,0,12,0" MinWidth="90">
+                        <Border.Effect><DropShadowEffect BlurRadius="8" Opacity="0.3" ShadowDepth="0"/></Border.Effect>
                         <StackPanel>
-                            <TextBlock Text="MEM" FontSize="12" Foreground="#88FFFFFF" FontWeight="Bold" />
+                            <TextBlock Text="MEM" FontSize="11" Foreground="#88FFFFFF" FontWeight="Bold"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding SystemStats.MemoryUsage, StringFormat={}{0:F0}}" FontSize="20" Foreground="White" FontFamily="Consolas" />
-                                <TextBlock Text="%" FontSize="12" Foreground="#44FFFFFF" VerticalAlignment="Bottom" Margin="2,0,0,2"/>
+                                <TextBlock Text="{Binding SystemStats.MemoryUsage, StringFormat={}{0:F0}}" FontSize="22" Foreground="White" FontWeight="Bold"/>
+                                <TextBlock Text="%" FontSize="11" Foreground="#55FFFFFF" VerticalAlignment="Bottom" Margin="2,0,0,3"/>
                             </StackPanel>
+                            <ProgressBar Value="{Binding SystemStats.MemoryUsage}" Maximum="100" Height="3" Margin="0,4,0,0"
+                                         Background="#22FFFFFF" Foreground="#AADDA0DD" BorderThickness="0"/>
+                        </StackPanel>
+                    </Border>
+                    <!-- DISK -->
+                    <Border Background="#0EFFFFFF" CornerRadius="12" Padding="14,10" Margin="0,0,12,0" MinWidth="90">
+                        <Border.Effect><DropShadowEffect BlurRadius="8" Opacity="0.3" ShadowDepth="0"/></Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="DISK" FontSize="11" Foreground="#88FFFFFF" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding SystemStats.DiskUsage, StringFormat={}{0:F0}}" FontSize="22" Foreground="White" FontWeight="Bold"/>
+                                <TextBlock Text="%" FontSize="11" Foreground="#55FFFFFF" VerticalAlignment="Bottom" Margin="2,0,0,3"/>
+                            </StackPanel>
+                            <ProgressBar Value="{Binding SystemStats.DiskUsage}" Maximum="100" Height="3" Margin="0,4,0,0"
+                                         Background="#22FFFFFF" Foreground="#AAFFA07A" BorderThickness="0"/>
+                        </StackPanel>
+                    </Border>
+                    <!-- BATTERY (only if available) -->
+                    <Border Background="#0EFFFFFF" CornerRadius="12" Padding="14,10" MinWidth="90"
+                            Visibility="{Binding IsBatteryVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Border.Effect><DropShadowEffect BlurRadius="8" Opacity="0.3" ShadowDepth="0"/></Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="BATT" FontSize="11" Foreground="#88FFFFFF" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding SystemStats.BatteryLevel, StringFormat={}{0:F0}}" FontSize="22" Foreground="White" FontWeight="Bold"/>
+                                <TextBlock Text="%" FontSize="11" Foreground="#55FFFFFF" VerticalAlignment="Bottom" Margin="2,0,0,3"/>
+                            </StackPanel>
+                            <ProgressBar Value="{Binding SystemStats.BatteryLevel}" Maximum="100" Height="3" Margin="0,4,0,0"
+                                         Background="#22FFFFFF" Foreground="#AA90EE90" BorderThickness="0"/>
                         </StackPanel>
                     </Border>
                 </StackPanel>
 
-                <TextBlock x:Name="AppsTitle" Text="Applications" Foreground="White" FontSize="24" Margin="0,0,0,20" />
-                <ItemsControl ItemsSource="{Binding Apps}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Button Margin="10" Background="Transparent" BorderThickness="0" Command="{Binding DataContext.LaunchAppCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}">
-                                <StackPanel Width="100">
-                                    <Image Source="{Binding Icon, Converter={StaticResource ByteArrayToImageConverter}}" Width="64" Height="64" />
-                                    <TextBlock Text="{Binding Name}" Foreground="White" TextAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,5,0,0" />
-                                </StackPanel>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <!-- Quick Actions -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
+                    <Button Content="⬛ Terminal"  Command="{Binding OpenTerminalCommand}"  Margin="0,0,10,0" Style="{StaticResource QuickActionButtonStyle}"/>
+                    <Button Content="🌐 Browser"   Command="{Binding OpenBrowserCommand}"   Margin="0,0,10,0" Style="{StaticResource QuickActionButtonStyle}"/>
+                    <Button Content="📁 Explorer"  Command="{Binding OpenExplorerCommand}"  Margin="0,0,10,0" Style="{StaticResource QuickActionButtonStyle}"/>
+                    <Button Content="⚙ Settings"  Command="{Binding OpenSettingsCommand}"  Style="{StaticResource QuickActionButtonStyle}"/>
+                </StackPanel>
+
+                <!-- Apps label + search -->
+                <TextBlock Text="Applications" Foreground="White" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                <Border Background="#0AFFFFFF" CornerRadius="10" Padding="12,8" Margin="0,0,0,14" MaxWidth="500" HorizontalAlignment="Left">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="🔍" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="#66FFFFFF"/>
+                        <TextBox Grid.Column="1" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                                 Background="Transparent" Foreground="White" BorderThickness="0"
+                                 MinWidth="260" VerticalContentAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="500">
+                    <ItemsControl ItemsSource="{Binding FilteredApps}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Margin="8" Background="Transparent" BorderThickness="0"
+                                        Command="{Binding DataContext.LaunchAppCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border x:Name="Bd" Background="Transparent" CornerRadius="14" Padding="10"
+                                                                RenderTransformOrigin="0.5,0.5">
+                                                            <Border.RenderTransform><ScaleTransform/></Border.RenderTransform>
+                                                            <Border.Triggers>
+                                                                <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <ColorAnimation Storyboard.TargetName="Bd" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#22FFFFFF" Duration="0:0:0.15"/>
+                                                                            <DoubleAnimation Storyboard.TargetName="Bd" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="1.1" Duration="0:0:0.15"/>
+                                                                            <DoubleAnimation Storyboard.TargetName="Bd" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" To="1.1" Duration="0:0:0.15"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </EventTrigger>
+                                                                <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <ColorAnimation Storyboard.TargetName="Bd" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#00FFFFFF" Duration="0:0:0.2"/>
+                                                                            <DoubleAnimation Storyboard.TargetName="Bd" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="1.0" Duration="0:0:0.2"/>
+                                                                            <DoubleAnimation Storyboard.TargetName="Bd" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleY)" To="1.0" Duration="0:0:0.2"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </EventTrigger>
+                                                            </Border.Triggers>
+                                                            <ContentPresenter/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                    <StackPanel Width="90">
+                                        <Image Source="{Binding Icon, Converter={StaticResource ByteArrayToImageConverter}}" Width="56" Height="56">
+                                            <Image.Effect><DropShadowEffect BlurRadius="8" Opacity="0.4" ShadowDepth="2"/></Image.Effect>
+                                        </Image>
+                                        <TextBlock Text="{Binding Name}" Foreground="#DDFFFFFF" TextAlignment="Center"
+                                                   TextTrimming="CharacterEllipsis" Margin="0,6,0,0" FontSize="11"/>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
             </StackPanel>
 
-            <!-- Right Side: Now Playing -->
-            <StackPanel x:Name="NowPlayingPanel" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5">
-                <StackPanel.RenderTransform>
-                    <TranslateTransform />
-                </StackPanel.RenderTransform>
-                <Border Background="#33FFFFFF" CornerRadius="20" Padding="20" Width="300">
+            <!-- ══ RIGHT COLUMN: Now Playing ════════════════════════════════ -->
+            <StackPanel x:Name="NowPlayingPanel" Grid.Column="1" VerticalAlignment="Bottom" Opacity="0"
+                        RenderTransformOrigin="0.5,0.5">
+                <StackPanel.RenderTransform><TranslateTransform/></StackPanel.RenderTransform>
+                <Border Background="#22FFFFFF" CornerRadius="24" Padding="20" Width="300">
+                    <Border.Effect><DropShadowEffect BlurRadius="30" Opacity="0.4" ShadowDepth="0"/></Border.Effect>
                     <StackPanel>
-                        <Image Source="{Binding NowPlaying.AlbumArt, Converter={StaticResource ByteArrayToImageConverter}}" Width="260" Height="260" Margin="0,0,0,15" />
-                        <TextBlock Text="{Binding NowPlaying.Title}" Foreground="White" FontSize="18" FontWeight="Bold" TextTrimming="CharacterEllipsis" />
-                        <TextBlock Text="{Binding NowPlaying.Artist}" Foreground="#AAFFFFFF" FontSize="14" />
-                        <TextBlock Text="{Binding NowPlaying.IsPlaying, Converter={StaticResource PlaybackStateConverter}}" Foreground="#88FFFFFF" FontSize="12" Margin="0,10,0,0" />
+                        <!-- Album art or placeholder -->
+                        <Border CornerRadius="14" ClipToBounds="True" Width="260" Height="260" Margin="0,0,0,14">
+                            <Grid>
+                                <!-- Placeholder gradient -->
+                                <Rectangle>
+                                    <Rectangle.Fill>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#441E3A5F" Offset="0"/>
+                                            <GradientStop Color="#44613659" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <TextBlock Text="♪" FontSize="70" Foreground="#33FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <!-- Actual art on top -->
+                                <Image Source="{Binding NowPlaying.AlbumArt, Converter={StaticResource ByteArrayToImageConverter}}"
+                                       Stretch="UniformToFill"/>
+                            </Grid>
+                        </Border>
+
+                        <TextBlock Text="{Binding NowPlaying.Title}" Foreground="White" FontSize="17" FontWeight="Bold"
+                                   TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding NowPlaying.Artist}" Foreground="#AAFFFFFF" FontSize="14" Margin="0,4,0,0"/>
+
+                        <!-- Playing status indicator -->
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0"
+                                    Visibility="{Binding IsNowPlayingVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Ellipse Width="7" Height="7" Fill="#90EE90" Margin="0,0,6,0">
+                                <Ellipse.Effect><BlurEffect Radius="2"/></Ellipse.Effect>
+                            </Ellipse>
+                            <TextBlock Text="Now Playing" Foreground="#88FFFFFF" FontSize="12"/>
+                        </StackPanel>
+
+                        <!-- Idle message -->
+                        <TextBlock Text="Nothing playing" Foreground="#44FFFFFF" FontSize="13" HorizontalAlignment="Center"
+                                   Margin="0,8,0,0"
+                                   Visibility="{Binding IsNowPlayingVisible, Converter={StaticResource InverseBooleanToVisibilityConverter}}"/>
                     </StackPanel>
                 </Border>
             </StackPanel>

@@ -6,6 +6,8 @@ namespace StartupDashboard.Services
     public interface ISecurityPolicyService
     {
         bool IsLockedOut { get; }
+        int  AttemptsRemaining { get; }
+        DateTime LockoutExpiry { get; }
         void RecordFailedAttempt();
         void ResetAttempts();
         void ClearSensitiveData(SecureString sensitiveData);
@@ -18,6 +20,8 @@ namespace StartupDashboard.Services
         private DateTime _lockoutExpiry = DateTime.MinValue;
 
         public bool IsLockedOut => DateTime.Now < _lockoutExpiry;
+        public int  AttemptsRemaining => Math.Max(0, MaxAttempts - _failedAttempts);
+        public DateTime LockoutExpiry => _lockoutExpiry;
 
         public void RecordFailedAttempt()
         {
