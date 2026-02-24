@@ -118,18 +118,31 @@ struct QuickActionsRow: View {
     var body: some View {
         HStack(spacing: 12) {
             QuickActionButton(icon: "terminal", label: "Terminal") {
-                NSWorkspace.shared.launchApplication("Terminal")
+                launch(bundleID: "com.apple.Terminal")
             }
             QuickActionButton(icon: "safari", label: "Safari") {
-                NSWorkspace.shared.launchApplication("Safari")
+                launch(bundleID: "com.apple.Safari")
             }
             QuickActionButton(icon: "folder", label: "Finder") {
-                NSWorkspace.shared.launchApplication("Finder")
+                launch(bundleID: "com.apple.finder")
             }
             QuickActionButton(icon: "gear", label: "System") {
-                NSWorkspace.shared.launchApplication("System Preferences")
+                // Try System Settings (macOS 13+) then System Preferences
+                if !launch(bundleID: "com.apple.systemsettings") {
+                    _ = launch(bundleID: "com.apple.systempreferences")
+                }
             }
         }
+    }
+
+    @discardableResult
+    private func launch(bundleID: String) -> Bool {
+        if let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID) {
+            let config = NSWorkspace.OpenConfiguration()
+            NSWorkspace.shared.openApplication(at: url, configuration: config, completionHandler: nil)
+            return true
+        }
+        return false
     }
 }
 
