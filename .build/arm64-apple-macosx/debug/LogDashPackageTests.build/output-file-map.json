@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/debug/LogDashPackageTests.build/master.swiftdeps"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/debug/LogDashPackageTests.derived/runner.swift": {
+    "dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/debug/LogDashPackageTests.build/runner.d",
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/debug/LogDashPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/debug/LogDashPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/debug/LogDashPackageTests.build/runner.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/debug/LogDashPackageTests.build/runner.dia"
+  }
+}

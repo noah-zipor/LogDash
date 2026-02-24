@@ -16,8 +16,10 @@ let package = Package(
             exclude: [
                 "StartupDashboard/com.startupdashboard.launcher.plist",
                 "Info.plist",
-                "UI/Logo",
                 "StartupDashboardTests"
+            ],
+            resources: [
+                .process("UI/Logo")
             ]
         ),
         .testTarget(

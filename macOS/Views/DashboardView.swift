@@ -21,6 +21,17 @@ struct DashboardView: View {
                 // ── Left Column ──────────────────────────────────────────
                 VStack(alignment: .leading, spacing: 0) {
 
+                    // Logo
+                    if let logoUrl = Bundle.module.url(forResource: "icon", withExtension: "png"),
+                       let logoImage = NSImage(contentsOf: logoUrl) {
+                        Image(nsImage: logoImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 48, height: 48)
+                            .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
+                            .padding(.bottom, 24)
+                    }
+
                     // Clock
                     VStack(alignment: .leading, spacing: 2) {
                         Text(viewModel.currentTime)
