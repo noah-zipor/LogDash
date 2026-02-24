@@ -2,15 +2,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "StartupDashboard",
+    name: "LogDash",
     platforms: [.macOS(.v12)],
     products: [
-        .executable(name: "StartupDashboard", targets: ["StartupDashboard"]),
+        .executable(name: "LogDashExecutable", targets: ["LogDashExecutable"]),
     ],
     dependencies: [],
     targets: [
         .executableTarget(
-            name: "StartupDashboard",
+            name: "LogDashExecutable",
             dependencies: [],
             path: "macOS",
             exclude: [
@@ -22,7 +22,7 @@ let package = Package(
         ),
         .testTarget(
             name: "StartupDashboardTests",
-            dependencies: ["StartupDashboard"],
+            dependencies: ["LogDashExecutable"],
             path: "macOS/StartupDashboardTests"
         ),
     ]

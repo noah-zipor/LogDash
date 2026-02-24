@@ -1,0 +1,139 @@
+{
+  "": {
+    "dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/LogDashExecutable.d",
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/LogDashExecutable.o",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/master.swiftdeps"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Core/Protocols.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/Protocols.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/Protocols~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/Protocols.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/Protocols.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/MainApp.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MainApp.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MainApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MainApp.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MainApp.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Services/AppServiceLauncher.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AppServiceLauncher.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AppServiceLauncher~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AppServiceLauncher.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AppServiceLauncher.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Services/AppleScriptHelper.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AppleScriptHelper.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AppleScriptHelper~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AppleScriptHelper.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AppleScriptHelper.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Services/MacOSMediaService.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSMediaService.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSMediaService~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSMediaService.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSMediaService.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Services/MacOSSecurityService.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSecurityService.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSecurityService~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSecurityService.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSecurityService.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Services/MacOSSettingsService.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSettingsService.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSettingsService~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSettingsService.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSettingsService.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Services/MacOSStartupService.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSStartupService.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSStartupService~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSStartupService.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSStartupService.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Services/MacOSSystemMonitorService.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSystemMonitorService.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSystemMonitorService~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSystemMonitorService.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MacOSSystemMonitorService.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Services/SecurityPolicyService.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SecurityPolicyService.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SecurityPolicyService~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SecurityPolicyService.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SecurityPolicyService.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/UI/AnimationExtensions.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AnimationExtensions.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AnimationExtensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AnimationExtensions.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/AnimationExtensions.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/UI/FilmGrain.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/FilmGrain.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/FilmGrain~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/FilmGrain.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/FilmGrain.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/UI/VisualEffectView.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/VisualEffectView.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/VisualEffectView~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/VisualEffectView.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/VisualEffectView.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/ViewModels/DashboardViewModel.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/DashboardViewModel.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/DashboardViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/DashboardViewModel.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/DashboardViewModel.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/ViewModels/LoginViewModel.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/LoginViewModel.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/LoginViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/LoginViewModel.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/LoginViewModel.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/ViewModels/MainViewModel.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MainViewModel.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MainViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MainViewModel.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/MainViewModel.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/ViewModels/SetupViewModel.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SetupViewModel.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SetupViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SetupViewModel.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SetupViewModel.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/ViewModels/WelcomeViewModel.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/WelcomeViewModel.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/WelcomeViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/WelcomeViewModel.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/WelcomeViewModel.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Views/DashboardView.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/DashboardView.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/DashboardView~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/DashboardView.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/DashboardView.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Views/LoginView.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/LoginView.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/LoginView~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/LoginView.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/LoginView.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Views/SetupView.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SetupView.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SetupView~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SetupView.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/SetupView.dia"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/Views/WelcomeView.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/WelcomeView.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/WelcomeView~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/WelcomeView.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/LogDashExecutable.build/WelcomeView.dia"
+  }
+}

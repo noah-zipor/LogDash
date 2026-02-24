@@ -1,0 +1,13 @@
+{
+  "": {
+    "dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/StartupDashboardTests.build/StartupDashboardTests.d",
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/StartupDashboardTests.build/StartupDashboardTests.o",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/StartupDashboardTests.build/master.swiftdeps"
+  },
+  "/Users/noahzipor/Documents/GitHub/LogDash/macOS/StartupDashboardTests/StartupDashboardTests.swift": {
+    "object": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/StartupDashboardTests.build/StartupDashboardTests.swift.o",
+    "swiftmodule": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/StartupDashboardTests.build/StartupDashboardTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/StartupDashboardTests.build/StartupDashboardTests.swiftdeps",
+    "diagnostics": "/Users/noahzipor/Documents/GitHub/LogDash/.build/arm64-apple-macosx/release/StartupDashboardTests.build/StartupDashboardTests.dia"
+  }
+}
