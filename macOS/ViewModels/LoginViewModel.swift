@@ -10,6 +10,8 @@ class LoginViewModel: ObservableObject {
     @Published var isErrorVisible = false
     @Published var attemptsRemaining: Int
 
+    var userName: String { authService.getUserName() }
+
     var onLoginSuccess: (() -> Void)?
 
     init(authService: AuthServiceProtocol, securityPolicy: SecurityPolicyService) {

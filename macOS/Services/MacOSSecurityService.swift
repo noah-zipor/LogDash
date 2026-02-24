@@ -3,13 +3,14 @@ import Security
 
 class MacOSSecurityService: AuthServiceProtocol {
     private let serviceName = "com.startupdashboard.auth"
-    private let accountName = "Noah"
+    private let accountKey = "PrimaryAccount" // Stable key for Keychain
+    private let nameKey = "com.startupdashboard.username"
 
     func authenticate(password: String) -> Bool {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
-            kSecAttrAccount as String: accountName,
+            kSecAttrAccount as String: accountKey,
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
@@ -31,7 +32,7 @@ class MacOSSecurityService: AuthServiceProtocol {
         let deleteQuery: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
-            kSecAttrAccount as String: accountName
+            kSecAttrAccount as String: accountKey
         ]
         SecItemDelete(deleteQuery as CFDictionary)
 
@@ -39,7 +40,7 @@ class MacOSSecurityService: AuthServiceProtocol {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
-            kSecAttrAccount as String: accountName,
+            kSecAttrAccount as String: accountKey,
             kSecValueData as String: data,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
         ]
@@ -50,10 +51,18 @@ class MacOSSecurityService: AuthServiceProtocol {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
-            kSecAttrAccount as String: accountName,
+            kSecAttrAccount as String: accountKey,
             kSecReturnData as String: false
         ]
         let status = SecItemCopyMatching(query as CFDictionary, nil)
         return status == errSecSuccess || status == errSecInteractionNotAllowed
+    }
+
+    func getUserName() -> String {
+        return UserDefaults.standard.string(forKey: nameKey) ?? NSFullUserName()
+    }
+
+    func setUserName(_ name: String) {
+        UserDefaults.standard.set(name, forKey: nameKey)
     }
 }

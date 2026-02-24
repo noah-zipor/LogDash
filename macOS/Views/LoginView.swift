@@ -9,8 +9,6 @@ struct LoginView: View {
     @State private var isLoaded = false
     @FocusState private var isPasswordFocused: Bool
 
-    private let username: String = NSFullUserName()
-
     var body: some View {
         ZStack {
             VisualEffectView(material: .hudWindow, blendingMode: .withinWindow)
@@ -85,7 +83,7 @@ struct LoginView: View {
                     .onAppear { pulseScale = 1.04 }
 
                     VStack(spacing: 3) {
-                        Text(username)
+                        Text(viewModel.userName)
                             .font(.system(size: 22, weight: .semibold, design: .rounded))
                             .foregroundColor(.white)
                         Text("Enter your password to continue")

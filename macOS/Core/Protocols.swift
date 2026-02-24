@@ -4,6 +4,8 @@ protocol AuthServiceProtocol {
     func authenticate(password: String) -> Bool
     func setPassword(newPassword: String)
     func isPasswordSet() -> Bool
+    func getUserName() -> String
+    func setUserName(_ name: String)
 }
 
 struct MediaInfo {

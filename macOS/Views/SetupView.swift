@@ -37,6 +37,7 @@ struct SetupView: View {
                 }
 
                 VStack(spacing: 16) {
+                    LabeledTextField(title: "Your Name", text: $viewModel.userName, placeholder: "Enter your name")
                     LabeledPasswordField(title: "New Password", text: $viewModel.password)
                     LabeledPasswordField(title: "Confirm Password", text: $viewModel.confirmPassword)
                 }
@@ -87,17 +88,60 @@ struct SetupView: View {
     }
 }
 
+private struct LabeledTextField: View {
+    let title: String
+    @Binding var text: String
+    let placeholder: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(title)
+                .font(.system(.caption, design: .rounded).weight(.semibold))
+                .foregroundColor(.white.opacity(0.5))
+            
+            TextField(placeholder, text: $text)
+                .textFieldStyle(.plain)
+                .font(.system(size: 14, design: .rounded))
+                .foregroundColor(.white)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 10)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.white.opacity(0.06))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.white.opacity(0.12), lineWidth: 0.5)
+                        )
+                )
+        }
+        .frame(width: 300)
+    }
+}
+
 private struct LabeledPasswordField: View {
     let title: String
     @Binding var text: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 6) {
             Text(title)
                 .font(.system(.caption, design: .rounded).weight(.semibold))
-                .foregroundColor(.white.opacity(0.6))
-            SecureField("", text: $text)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .foregroundColor(.white.opacity(0.5))
+            
+            SecureField("••••••••", text: $text)
+                .textFieldStyle(.plain)
+                .font(.system(size: 14, design: .rounded))
+                .foregroundColor(.white)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 10)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.white.opacity(0.06))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.white.opacity(0.12), lineWidth: 0.5)
+                        )
+                )
         }
         .frame(width: 300)
     }
