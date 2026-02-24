@@ -12,74 +12,109 @@ struct SetupView: View {
             Color.black.opacity(0.4).ignoresSafeArea()
                 .filmGrain()
 
-            // Subtle background glow
+            // Ambient background glow
             Circle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.2), Color.cyan.opacity(0.15)]), startPoint: .top, endPoint: .bottom))
+                .fill(
+                    RadialGradient(
+                        colors: [Color.blue.opacity(0.3), Color.cyan.opacity(0.1), .clear],
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: 250
+                    )
+                )
                 .frame(width: 500, height: 500)
-                .blur(radius: 120)
+                .blur(radius: 80)
+                .opacity(0.6)
 
-            VStack(spacing: 24) {
+            VStack(spacing: 32) {
                 LogoView(size: 80)
-                    .shadow(color: .blue.opacity(0.3), radius: 15, x: 0, y: 0)
+                    .shadow(color: .blue.opacity(0.2), radius: 15, x: 0, y: 0)
 
-                VStack(spacing: 6) {
+                VStack(spacing: 8) {
                     Text("Initialize Dashboard")
                         .font(.system(size: 26, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
-                    Text("Set a secure password to protect your workspace.")
+                    Text("Set a secure password to protect your workspace")
                         .font(.system(.subheadline, design: .rounded))
-                        .foregroundColor(.white.opacity(0.6))
+                        .foregroundColor(.white.opacity(0.5))
                         .multilineTextAlignment(.center)
                 }
 
-                VStack(spacing: 16) {
+                VStack(spacing: 18) {
                     LabeledTextField(title: "Your Name", text: $viewModel.userName, placeholder: "Enter your name", onSubmit: { viewModel.setup() })
                     LabeledPasswordField(title: "New Password", text: $viewModel.password, onSubmit: { viewModel.setup() })
                     LabeledPasswordField(title: "Confirm Password", text: $viewModel.confirmPassword, onSubmit: { viewModel.setup() })
                 }
 
                 if viewModel.isErrorVisible {
-                    Label(viewModel.errorMessage, systemImage: "exclamationmark.circle.fill")
-                        .foregroundColor(.red)
-                        .font(.caption)
-                        .transition(.opacity.combined(with: .move(edge: .top)))
+                    HStack(spacing: 6) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.caption2)
+                        Text(viewModel.errorMessage)
+                            .font(.system(.caption, design: .rounded).weight(.medium))
+                    }
+                    .foregroundColor(.red.opacity(0.9))
+                    .padding(.top, -8)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
                 }
 
                 Button(action: { withAnimation { viewModel.setup() } }) {
-                    HStack {
-                        Image(systemName: "checkmark.seal.fill")
+                    HStack(spacing: 8) {
+                        Image(systemName: "key.fill")
+                            .font(.system(size: 13, weight: .semibold))
                         Text("Complete Setup")
+                            .font(.system(size: 15, weight: .semibold, design: .rounded))
                     }
-                    .font(.headline)
                     .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(
+                                LinearGradient(
+                                    colors: [Color.blue.opacity(0.85), Color.blue.opacity(0.6)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .shadow(color: .blue.opacity(0.3), radius: 10, x: 0, y: 5)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14)
+                            .stroke(Color.white.opacity(0.2), lineWidth: 0.5)
+                    )
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .tint(.blue)
+                .buttonStyle(.plain)
                 .frame(width: 300)
 
-                Button("Exit") { viewModel.exit() }
-                    .buttonStyle(.plain)
-                    .foregroundColor(.white.opacity(0.4))
-                    .font(.footnote)
+                Button("Exit Application") { 
+                    withAnimation { viewModel.exit() } 
+                }
+                .buttonStyle(.plain)
+                .foregroundColor(.white.opacity(0.3))
+                .font(.system(.footnote, design: .rounded))
             }
-            .padding(50)
-            .frame(width: 420)
+            .padding(.horizontal, 40)
+            .padding(.vertical, 50)
             .background(
-                RoundedRectangle(cornerRadius: 30)
-                    .fill(Color.black.opacity(0.4))
-                    .background(VisualEffectView(material: .popover, blendingMode: .withinWindow).cornerRadius(30))
+                RoundedRectangle(cornerRadius: 32)
+                    .fill(Color.black.opacity(0.35))
+                    .background(VisualEffectView(material: .popover, blendingMode: .withinWindow).cornerRadius(32))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 30)
-                            .stroke(LinearGradient(colors: [.white.opacity(0.25), .clear], startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 1)
+                        RoundedRectangle(cornerRadius: 32)
+                            .stroke(LinearGradient(colors: [.white.opacity(0.2), .clear], startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 1)
                     )
             )
-            .shadow(color: .black.opacity(0.5), radius: 40, x: 0, y: 20)
-            .drawingGroup()
-            .scaleEffect(isLoaded ? 1 : 0.9)
+            .shadow(color: .black.opacity(0.5), radius: 60, x: 0, y: 30)
+            .frame(width: 400)
+            .scaleEffect(isLoaded ? 1 : 0.94)
             .opacity(isLoaded ? 1 : 0)
-            .animation(.spring(response: 0.6, dampingFraction: 0.8), value: isLoaded)
-            .onAppear { isLoaded = true }
+            .animation(.spring(response: 0.55, dampingFraction: 0.8), value: isLoaded)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    isLoaded = true
+                }
+            }
+
         }
     }
 }

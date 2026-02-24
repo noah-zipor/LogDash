@@ -20,7 +20,6 @@ struct FilmGrainView: View {
                     .resizable(resizingMode: .tile)
                     .opacity(0.04)
                     .blendMode(.screen)
-                    .drawingGroup()
             }
             .ignoresSafeArea()
         }
