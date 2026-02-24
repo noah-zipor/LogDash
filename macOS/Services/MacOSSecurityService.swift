@@ -3,14 +3,29 @@ import Security
 
 class MacOSSecurityService: AuthServiceProtocol {
     private let serviceName = "com.startupdashboard.auth"
-    private let accountKey = "PrimaryAccount" // Stable key for Keychain
+    private let accountKey = "PrimaryAccount"
+    private let legacyAccountName = "Noah"
     private let nameKey = "com.startupdashboard.username"
 
     func authenticate(password: String) -> Bool {
+        // Try current key first
+        if let stored = getStoredPassword(for: accountKey), stored == password {
+            return true
+        }
+        // Fallback to legacy key for migration
+        if let stored = getStoredPassword(for: legacyAccountName), stored == password {
+            // Migrate to new key
+            setPassword(newPassword: password)
+            return true
+        }
+        return false
+    }
+
+    private func getStoredPassword(for account: String) -> String? {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
-            kSecAttrAccount as String: accountKey,
+            kSecAttrAccount as String: account,
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
@@ -18,11 +33,10 @@ class MacOSSecurityService: AuthServiceProtocol {
         var dataTypeRef: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
 
-        if status == errSecSuccess, let data = dataTypeRef as? Data, let storedPassword = String(data: data, encoding: .utf8) {
-            return storedPassword == password
+        if status == errSecSuccess, let data = dataTypeRef as? Data {
+            return String(data: data, encoding: .utf8)
         }
-
-        return false
+        return nil
     }
 
     func setPassword(newPassword: String) {

@@ -21,16 +21,10 @@ struct WelcomeView: View {
                 .blur(radius: glowRadius)
 
             VStack(spacing: 30) {
-                if let logoUrl = Bundle.module.url(forResource: "icon", withExtension: "png"),
-                   let logoImage = NSImage(contentsOf: logoUrl) {
-                    Image(nsImage: logoImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 120, height: 120)
-                        .shadow(color: .white.opacity(0.2), radius: 20, x: 0, y: 0)
-                        .offset(y: offset)
-                        .opacity(opacity)
-                }
+                LogoView(size: 120)
+                    .shadow(color: .white.opacity(0.2), radius: 20, x: 0, y: 0)
+                    .offset(y: offset)
+                    .opacity(opacity)
 
                 Text(viewModel.greeting)
                     .font(.system(size: 130, weight: .light, design: .rounded))

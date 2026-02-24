@@ -58,24 +58,7 @@ struct LoginView: View {
                                         lineWidth: 1
                                     )
                             )
-
-                        if let logoUrl = Bundle.module.url(forResource: "icon", withExtension: "png"),
-                           let logoImage = NSImage(contentsOf: logoUrl) {
-                            Image(nsImage: logoImage)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 70, height: 70)
-                        } else {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 40, weight: .light))
-                                .foregroundStyle(
-                                    LinearGradient(
-                                        colors: [.white, .white.opacity(0.6)],
-                                        startPoint: .top,
-                                        endPoint: .bottom
-                                    )
-                                )
-                        }
+                        LogoView(size: 70)
                     }
                     .scaleEffect(pulseScale)
                     .shadow(color: .blue.opacity(0.2), radius: 25, x: 0, y: 0)

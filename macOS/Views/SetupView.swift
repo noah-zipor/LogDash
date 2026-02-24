@@ -19,12 +19,8 @@ struct SetupView: View {
                 .blur(radius: 120)
 
             VStack(spacing: 24) {
-                Image(systemName: "lock.shield.fill")
-                    .font(.system(size: 56))
-                    .foregroundStyle(
-                        LinearGradient(colors: [.white.opacity(0.9), .blue.opacity(0.6)], startPoint: .top, endPoint: .bottom)
-                    )
-                    .shadow(color: .blue.opacity(0.4), radius: 12, x: 0, y: 0)
+                LogoView(size: 80)
+                    .shadow(color: .blue.opacity(0.3), radius: 15, x: 0, y: 0)
 
                 VStack(spacing: 6) {
                     Text("Initialize Dashboard")
@@ -37,9 +33,9 @@ struct SetupView: View {
                 }
 
                 VStack(spacing: 16) {
-                    LabeledTextField(title: "Your Name", text: $viewModel.userName, placeholder: "Enter your name")
-                    LabeledPasswordField(title: "New Password", text: $viewModel.password)
-                    LabeledPasswordField(title: "Confirm Password", text: $viewModel.confirmPassword)
+                    LabeledTextField(title: "Your Name", text: $viewModel.userName, placeholder: "Enter your name", onSubmit: { viewModel.setup() })
+                    LabeledPasswordField(title: "New Password", text: $viewModel.password, onSubmit: { viewModel.setup() })
+                    LabeledPasswordField(title: "Confirm Password", text: $viewModel.confirmPassword, onSubmit: { viewModel.setup() })
                 }
 
                 if viewModel.isErrorVisible {
@@ -92,6 +88,7 @@ private struct LabeledTextField: View {
     let title: String
     @Binding var text: String
     let placeholder: String
+    var onSubmit: (() -> Void)? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -113,6 +110,7 @@ private struct LabeledTextField: View {
                                 .stroke(Color.white.opacity(0.12), lineWidth: 0.5)
                         )
                 )
+                .onSubmit { onSubmit?() }
         }
         .frame(width: 300)
     }
@@ -121,6 +119,7 @@ private struct LabeledTextField: View {
 private struct LabeledPasswordField: View {
     let title: String
     @Binding var text: String
+    var onSubmit: (() -> Void)? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -142,6 +141,7 @@ private struct LabeledPasswordField: View {
                                 .stroke(Color.white.opacity(0.12), lineWidth: 0.5)
                         )
                 )
+                .onSubmit { onSubmit?() }
         }
         .frame(width: 300)
     }
