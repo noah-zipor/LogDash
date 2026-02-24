@@ -12,17 +12,18 @@ let package = Package(
         .executableTarget(
             name: "StartupDashboard",
             dependencies: [],
-            path: "macOS/StartupDashboard",
+            path: "macOS",
             exclude: [
-                "com.startupdashboard.launcher.plist",
+                "StartupDashboard/com.startupdashboard.launcher.plist",
                 "Info.plist",
-                "UI/Logo"
+                "UI/Logo",
+                "StartupDashboardTests"
             ]
         ),
         .testTarget(
             name: "StartupDashboardTests",
             dependencies: ["StartupDashboard"],
-            path: "Tests/StartupDashboardTests"
+            path: "macOS/StartupDashboardTests"
         ),
     ]
 )
